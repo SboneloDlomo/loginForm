@@ -1,0 +1,24 @@
+name: Deploy to S3
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{AKIA575EURAUJ5IOLQO2}}
+        aws-secret-access-key: ${{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}}
+        aws-region: us-east-1
+
+    - name: Sync S3 Bucket
+      run: |
+        aws s3 sync . s3://loginform1 --exclude ".git/*"
